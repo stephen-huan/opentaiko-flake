@@ -106,5 +106,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
     homepage = "https://opentaiko.github.io/";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ stephen-huan ];
+    mainProgram = "OpenTaiko-Hub";
   };
 })
