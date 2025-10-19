@@ -15,12 +15,32 @@
         pkgs = nixpkgs.legacyPackages.${system};
         formatter = pkgs.nixpkgs-fmt;
         linters = [ pkgs.statix ];
+        inherit (self.packages.${system}) opentaiko opentaiko-hub;
       in
       {
         packages.${system} = rec {
           default = opentaiko;
-          opentaiko = pkgs.callPackage ./opentaiko { };
-          opentaiko-hub = pkgs.callPackage ./opentaiko-hub { };
+          opentaiko-unwrapped = pkgs.callPackage ./opentaiko { };
+          opentaiko-hub-unwrapped = pkgs.callPackage ./opentaiko-hub { };
+          opentaiko = pkgs.symlinkJoin {
+            inherit (opentaiko-unwrapped) name meta;
+            paths = [ opentaiko-unwrapped ];
+            buildInputs = [ pkgs.makeWrapper ];
+            postBuild = ''
+              wrapProgram $out/bin/OpenTaiko \
+                --suffix XDG_DATA_DIRS : \
+                  "/run/opengl-driver/share:/run/opengl-driver-32/share"
+            '';
+          };
+          opentaiko-hub = pkgs.symlinkJoin {
+            inherit (opentaiko-hub-unwrapped) name meta;
+            paths = [ opentaiko-hub-unwrapped ];
+            buildInputs = [ pkgs.makeWrapper ];
+            postBuild = ''
+              wrapProgram $out/bin/OpenTaiko-Hub \
+                --set WEBKIT_DISABLE_DMABUF_RENDERER "1"
+            '';
+          };
         };
 
         formatter.${system} = formatter;
