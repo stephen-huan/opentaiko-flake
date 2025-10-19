@@ -17,7 +17,9 @@
         linters = [ pkgs.statix ];
       in
       {
-        packages.${system} = {
+        packages.${system} = rec {
+          default = opentaiko;
+          opentaiko = pkgs.callPackage ./opentaiko { };
           opentaiko-hub = pkgs.callPackage ./opentaiko-hub { };
         };
 
@@ -54,6 +56,7 @@
           };
         }) {
           packages = with self.packages.${system}; [
+            opentaiko
             opentaiko-hub
           ];
         };

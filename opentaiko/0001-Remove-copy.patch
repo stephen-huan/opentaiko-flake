@@ -1,0 +1,25 @@
+From 5131a050d76172aff9a0ae36d07b832db3998304 Mon Sep 17 00:00:00 2001
+From: Stephen Huan <stephen.huan@cgdct.moe>
+Date: Sun, 19 Oct 2025 10:43:11 -0400
+Subject: [PATCH] Remove copy
+
+---
+ OpenTaiko/src/Common/Program.cs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/OpenTaiko/src/Common/Program.cs b/OpenTaiko/src/Common/Program.cs
+index 14dd48b6..13ed7827 100644
+--- a/OpenTaiko/src/Common/Program.cs
++++ b/OpenTaiko/src/Common/Program.cs
+@@ -96,7 +96,7 @@ internal class Program {
+ 
+ 					//実行ファイルの階層にライブラリをコピー
+ 					foreach (FileInfo fileinfo in info.GetFiles()) {
+-						fileinfo.CopyTo(AppContext.BaseDirectory + fileinfo.Name, true);
++						// fileinfo.CopyTo(AppContext.BaseDirectory + fileinfo.Name, true);
+ 					}
+ 
+ 					using (var mania = new OpenTaiko())
+-- 
+2.51.0
+
