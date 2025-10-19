@@ -15,6 +15,18 @@
         pkgs = nixpkgs.legacyPackages.${system};
         formatter = pkgs.nixpkgs-fmt;
         linters = [ pkgs.statix ];
+        get_documents_dir = ''
+          get_documents_dir() {
+              # get the documents directory
+              # adapted from https://xdgbasedirectoryspecification.com/
+              local documents_dir="''${XDG_DOCUMENTS_DIR-}"
+              if [ -z "$documents_dir" ] || [ "''${documents_dir::1}" != '/' ]; then
+                  echo -n "$HOME/Documents"
+              else
+                  echo -n "$documents_dir"
+              fi
+          }
+        '';
         inherit (self.packages.${system}) opentaiko opentaiko-hub;
       in
       {
@@ -58,6 +70,55 @@
         };
 
         apps.${system} = {
+          copy-settings = {
+            type = "app";
+            program = lib.getExe (pkgs.writeShellApplication {
+              name = "copy-settings";
+              runtimeInputs = [ ];
+              text = get_documents_dir + ''
+                SETTINGS_PATH="$(get_documents_dir)/settings"
+                cp -Lr "${opentaiko-hub}/lib/OpenTaiko Hub/settings" \
+                  -T "$SETTINGS_PATH"
+                chmod -R +w "$SETTINGS_PATH"
+              '';
+            });
+          };
+          copy-game = {
+            type = "app";
+            program = lib.getExe (pkgs.writeShellApplication {
+              name = "copy-game";
+              runtimeInputs = [ ];
+              text = get_documents_dir + ''
+                GAME_PATH="$(get_documents_dir)/OpenTaiko"
+                cp ${lib.getExe opentaiko} -T "$GAME_PATH/OpenTaiko"
+                chmod +w "$GAME_PATH/OpenTaiko"
+              '';
+            });
+          };
+          copy-game-full = {
+            type = "app";
+            program = lib.getExe (pkgs.writeShellApplication {
+              name = "copy-game-full";
+              runtimeInputs = [ ];
+              text = get_documents_dir + ''
+                GAME_PATH="$(get_documents_dir)/OpenTaiko"
+                cp -Lr "${opentaiko}/lib/opentaiko" -T "$GAME_PATH"
+                chmod -R +w "$GAME_PATH"
+              '';
+            });
+          };
+          run-game = {
+            type = "app";
+            program = lib.getExe (pkgs.writeShellApplication {
+              name = "run-game";
+              runtimeInputs = [ ];
+              text = get_documents_dir + ''
+                GAME_PATH="$(get_documents_dir)/OpenTaiko"
+                cd "$GAME_PATH" || exit
+                ./OpenTaiko
+              '';
+            });
+          };
           update = {
             type = "app";
             program = lib.getExe (pkgs.writeShellApplication {
