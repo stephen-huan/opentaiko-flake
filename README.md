@@ -64,7 +64,7 @@ To fetch the
 for OpenTaiko, run
 
 ```shell
-nix build .#opentaiko.passthru.fetch-deps
+nix build .#opentaiko-unwrapped.passthru.fetch-deps
 ./result ./opentaiko/deps.json
 ```
 
