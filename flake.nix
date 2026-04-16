@@ -33,6 +33,9 @@
         packages.${system} = rec {
           default = opentaiko;
           opentaiko-unwrapped = pkgs.callPackage ./opentaiko { };
+          opentaiko-debug = opentaiko-unwrapped.overrideAttrs {
+            buildType = "Debug";
+          };
           opentaiko-hub-unwrapped = pkgs.callPackage ./opentaiko-hub { };
           opentaiko = pkgs.symlinkJoin {
             inherit (opentaiko-unwrapped) name meta;

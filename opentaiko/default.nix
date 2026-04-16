@@ -42,8 +42,6 @@ buildDotnetModule rec {
 
   selfContainedBuild = true;
 
-  # buildType = "Debug";
-
   preFixup = ''
     local -r dotnetInstallPath="''${dotnetInstallPath-$out/lib/$pname}"
     cp $dotnetInstallPath/Libs/$runtimeId/* -t $dotnetInstallPath
