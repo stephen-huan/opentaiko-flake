@@ -136,7 +136,7 @@
             initialPath = [ pkgs.coreutils ];
           };
         }) {
-          packages = with self.packages.${system}; [
+          packages = [
             opentaiko
             opentaiko-hub
           ];
