@@ -2,19 +2,20 @@
 , buildDotnetModule
 , dotnetCorePackages
 , fetchFromGitHub
-, xorg
+, libx11
+, libxext
 , alsa-lib
 }:
 
 buildDotnetModule rec {
   pname = "opentaiko";
-  version = "0.6.0.89";
+  version = "0.6.0.105";
 
   src = fetchFromGitHub {
     owner = "0auBSQ";
     repo = "OpenTaiko";
     tag = version;
-    hash = "sha256-BJ0JbZ/t5IhHj29OWzYcGtt+qV9Vy7pG9f25g3y3YjE=";
+    hash = "sha256-51DLO3ArTE9djAwRfhLbbEGLI8oEiUS7sU0vgfNqZ/k=";
   };
 
   patches = [
@@ -34,8 +35,8 @@ buildDotnetModule rec {
   packNupkg = false;
 
   runtimeDeps = [
-    xorg.libX11
-    xorg.libXext
+    libx11
+    libxext
     alsa-lib
   ];
 
@@ -51,6 +52,7 @@ buildDotnetModule rec {
   meta = {
     description = "Free, open source and customizable Taiko-style rhythm game";
     homepage = "https://opentaiko.github.io/";
+    changelog = "https://github.com/0auBSQ/OpenTaiko/blob/main/CHANGELOG.md";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ stephen-huan ];
     mainProgram = "OpenTaiko";
