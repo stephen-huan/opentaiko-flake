@@ -77,4 +77,4 @@ Post action failed.
 Manual instructions: Run 'chmod 600 nuget.config'
 ```
 
-The debug build is helpful to get tracebacks.
+The debug build (`opentaiko-debug`) is helpful to get tracebacks.
