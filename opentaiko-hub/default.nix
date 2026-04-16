@@ -51,21 +51,21 @@ let
 in
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "opentaiko-hub";
-  version = "0.1.7";
+  version = "0.1.20";
 
   src = fetchFromGitHub {
     owner = "OpenTaiko";
     repo = "OpenTaiko-Hub";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-WguiNJhC8MmYPbSzZq3h84R9UAe3te5y5Hzpicg+O70=";
+    hash = "sha256-tQlf2d8Jyo5Ojku3jn5HSxZN6NdhaAmPBbFUWA+YPmo=";
   };
 
-  cargoHash = "sha256-6dnIpVLgS0IqBpwfPFNGoZoUzHg0G0iEZlhOWQU1w1s=";
+  cargoHash = "sha256-AwVL5+1ZbmZ/MAwQTQcV/2uVz5LG0Q4VGKm5JxbVqHk=";
 
   npmDeps = fetchNpmDeps {
     name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
     inherit (finalAttrs) src;
-    hash = "sha256-Z7iTqwXl7NBrd7vg6aAOdqgp0z8Bg26faKcaaC5Gtls=";
+    hash = "sha256-VmlTsszMjEUKfMq5bwtNZAJLa0ST1ZA0zbBxN+Dzv7I=";
   };
 
   nativeBuildInputs = [
@@ -98,12 +98,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
   cargoRoot = "src-tauri";
   buildAndTestSubdir = finalAttrs.cargoRoot;
 
-  # https://github.com/OpenTaiko/OpenTaiko-Hub/issues/14
-  tauriBuildFlags = [ "--ignore-version-mismatches" ];
-
   meta = {
     description = "Launcher, updater and asset manager for OpenTaiko";
     homepage = "https://opentaiko.github.io/";
+    changelog = "https://github.com/OpenTaiko/OpenTaiko-Hub/blob/main/CHANGELOG.md";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ stephen-huan ];
     mainProgram = "OpenTaiko-Hub";
