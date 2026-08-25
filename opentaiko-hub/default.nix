@@ -51,21 +51,21 @@ let
 in
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "opentaiko-hub";
-  version = "0.1.20";
+  version = "0.2.2";
 
   src = fetchFromGitHub {
     owner = "OpenTaiko";
     repo = "OpenTaiko-Hub";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-tQlf2d8Jyo5Ojku3jn5HSxZN6NdhaAmPBbFUWA+YPmo=";
+    hash = "sha256-qctagJQCsOcGvfC6npIChHe5MlVAukHX9eC6vsJisQU=";
   };
 
-  cargoHash = "sha256-AwVL5+1ZbmZ/MAwQTQcV/2uVz5LG0Q4VGKm5JxbVqHk=";
+  cargoHash = "sha256-3ZWt0MNvWklAXcEBedZe+1ue/qywMyb0XdVO9pWk5b8=";
 
   npmDeps = fetchNpmDeps {
     name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
     inherit (finalAttrs) src;
-    hash = "sha256-VmlTsszMjEUKfMq5bwtNZAJLa0ST1ZA0zbBxN+Dzv7I=";
+    hash = "sha256-saC4QmLKFeQfhHuzH1BVO14ZJpxGRrZNMpBukx0bnc4=";
   };
 
   nativeBuildInputs = [
