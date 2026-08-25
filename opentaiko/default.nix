@@ -9,13 +9,13 @@
 
 buildDotnetModule rec {
   pname = "opentaiko";
-  version = "0.6.0.105";
+  version = "0.6.0.109";
 
   src = fetchFromGitHub {
     owner = "0auBSQ";
     repo = "OpenTaiko";
     tag = version;
-    hash = "sha256-51DLO3ArTE9djAwRfhLbbEGLI8oEiUS7sU0vgfNqZ/k=";
+    hash = "sha256-uaGuq1hDb6dzNZ+3OBtYpxTU9nmGGphLQ7RBQDRjhI4=";
   };
 
   patches = [
