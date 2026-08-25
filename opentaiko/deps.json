@@ -20,11 +20,6 @@
     "hash": "sha256-ouRL7+0bW/VYUNNYQoXenXzYO0HNF3D1IsScqtah3DE="
   },
   {
-    "pname": "managed-midi",
-    "version": "1.10.1",
-    "hash": "sha256-iuqpyp8vM7ZjtcM9KNqx9se/UhQHsYrQ+lxL4EntyXU="
-  },
-  {
     "pname": "ManagedBass",
     "version": "3.1.1",
     "hash": "sha256-JhcmZiLchAQXrFG6+ye/w3W4IG6f63K/hH+fAWNM90I="
@@ -193,6 +188,11 @@
     "pname": "NLua",
     "version": "1.7.3",
     "hash": "sha256-2+eOxal0BDwAc6nJTNsFvf5E0KdfksIie7C7hEKeQos="
+  },
+  {
+    "pname": "ppy.managed-midi",
+    "version": "1.10.2",
+    "hash": "sha256-JqKDea1yCsMIlQGu8OUxw+6J0ZxmHz+VysVzcsZBd4w="
   },
   {
     "pname": "ReadJEnc",
